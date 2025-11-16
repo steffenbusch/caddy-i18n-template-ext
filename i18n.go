@@ -32,7 +32,7 @@ import (
 )
 
 func init() {
-	caddy.RegisterModule((*I18n)(nil))
+	caddy.RegisterModule(I18n{})
 }
 
 // I18n implements a simple internationalization (i18n) template extension for Caddy v2.
@@ -68,14 +68,14 @@ type I18n struct {
 	translations map[string]map[string]string
 
 	// mu protects concurrent access to the translations map.
-	mu sync.RWMutex
+	mu *sync.RWMutex
 
 	// logger is the Caddy logger instance for logging warnings and info messages.
 	logger *zap.Logger
 }
 
 // CaddyModule returns the Caddy module information for registration.
-func (*I18n) CaddyModule() caddy.ModuleInfo {
+func (I18n) CaddyModule() caddy.ModuleInfo {
 	return caddy.ModuleInfo{
 		ID:  "http.handlers.templates.functions.i18n",
 		New: func() caddy.Module { return new(I18n) },
@@ -86,6 +86,10 @@ func (*I18n) CaddyModule() caddy.ModuleInfo {
 // from the configured JSON file. It is called during Caddy's provisioning phase.
 func (i *I18n) Provision(ctx caddy.Context) error {
 	i.logger = ctx.Logger()
+
+	if i.mu == nil {
+		i.mu = &sync.RWMutex{}
+	}
 
 	// Initialize the translations map
 	i.translations = make(map[string]map[string]string)

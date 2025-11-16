@@ -17,6 +17,7 @@ package i18n
 import (
 	"os"
 	"path/filepath"
+	"sync"
 	"testing"
 
 	"github.com/caddyserver/caddy/v2"
@@ -41,6 +42,7 @@ func TestI18nProvision(t *testing.T) {
 	}`)
 
 	i18n := &I18n{DictFile: dictFile}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 	var stubCaddyCtx caddy.Context
 
@@ -123,6 +125,7 @@ func TestI18nTranslateBasic(t *testing.T) {
 			"welcome": {"de": "Willkommen", "en": "Welcome"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -155,6 +158,7 @@ func TestI18nTranslateFallback(t *testing.T) {
 			"hello": {"en": "Hello"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -173,6 +177,7 @@ func TestI18nTranslateMissingKey(t *testing.T) {
 	i18n := &I18n{
 		translations: map[string]map[string]string{},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -193,6 +198,7 @@ func TestI18nTranslateMissingLanguage(t *testing.T) {
 			"hello": {"fr": "Bonjour"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -213,6 +219,7 @@ func TestI18nTranslateEmptyKey(t *testing.T) {
 	i18n := &I18n{
 		translations: map[string]map[string]string{},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -234,6 +241,7 @@ func TestI18nInterpolateWithI18nPrefix(t *testing.T) {
 			"error.invalidAmount": {"de": "Ungültiger Betrag: {0}", "en": "Invalid amount: {0}"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -262,6 +270,7 @@ func TestI18nInterpolateWithoutPrefix(t *testing.T) {
 			"error.user": {"de": "Fehler bei Benutzer: {0}", "en": "Error for user: {0}"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -284,6 +293,7 @@ func TestI18nInterpolateMultipleArgs(t *testing.T) {
 			"module": {"de": "Modul", "en": "Module"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -304,6 +314,7 @@ func TestI18nInterpolateNonStringArg(t *testing.T) {
 			"amount": {"de": "Betrag: {0}", "en": "Amount: {0}"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -324,6 +335,7 @@ func TestI18nInterpolateInvalidPlaceholder(t *testing.T) {
 			"msg": {"en": "Value: {0} and {5}"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -346,6 +358,7 @@ func TestI18nInterpolateNestedI18nPrefix(t *testing.T) {
 			"msg":     {"de": "Typ: {0}", "en": "Type: {0}"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -367,6 +380,7 @@ func TestI18nInterpolateUnknownI18nKey(t *testing.T) {
 			"msg": {"en": "Value: {0}"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -389,6 +403,7 @@ func TestI18nInterpolateMixedArgs(t *testing.T) {
 			"system": {"en": "System"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -410,6 +425,7 @@ func TestI18nInterpolateWithFloat(t *testing.T) {
 			"price": {"en": "Price: {0} EUR"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -430,6 +446,7 @@ func TestI18nInterpolateWithInt(t *testing.T) {
 			"count": {"en": "Items: {0}"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -450,6 +467,7 @@ func TestI18nNoArgs(t *testing.T) {
 			"hello": {"de": "Hallo Welt", "en": "Hello World"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
@@ -470,6 +488,7 @@ func TestI18nFallbackToEnglish(t *testing.T) {
 			"welcome": {"en": "Welcome"},
 		},
 	}
+	i18n.mu = new(sync.RWMutex)
 	i18n.logger = zaptest.NewLogger(t)
 
 	funcMap := i18n.CustomTemplateFunctions()
