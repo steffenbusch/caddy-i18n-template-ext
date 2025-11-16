@@ -1,0 +1,16 @@
+{
+	debug
+	#admin off
+}
+
+:8777 {
+	root ./demo/html
+	templates {
+		extensions {
+			i18n {
+				dict_file ./demo/translations.json
+			}
+		}
+	}
+	file_server
+}

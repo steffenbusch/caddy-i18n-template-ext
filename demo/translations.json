@@ -1,0 +1,82 @@
+{
+  "hello": {
+    "de": "Hallo Welt",
+    "en": "Hello World"
+  },
+  "welcome": {
+    "de": "Willkommen",
+    "en": "Welcome"
+  },
+  "bye": {
+    "de": "Auf Wiedersehen",
+    "en": "Goodbye"
+  },
+  "error.internalError": {
+    "de": "Interner Serverfehler. Bitte kontaktieren Sie den Support mit Referenz \"{0}\" und \"{1}\"",
+    "en": "Internal server error. Please contact support with reference \"{0}\" and \"{1}\""
+  },
+  "finance.account": {
+    "de": "Konto",
+    "en": "Account"
+  },
+  "finance.balance": {
+    "de": "Kontostand",
+    "en": "Balance"
+  },
+  "finance.transaction": {
+    "de": "Transaktion",
+    "en": "Transaction"
+  },
+  "finance.deposit": {
+    "de": "Einzahlung",
+    "en": "Deposit"
+  },
+  "finance.withdrawal": {
+    "de": "Auszahlung",
+    "en": "Withdrawal"
+  },
+  "finance.transfer": {
+    "de": "Überweisung",
+    "en": "Transfer"
+  },
+  "finance.invoice": {
+    "de": "Rechnung",
+    "en": "Invoice"
+  },
+  "finance.payment": {
+    "de": "Zahlung",
+    "en": "Payment"
+  },
+  "finance.currency": {
+    "de": "Währung",
+    "en": "Currency"
+  },
+  "finance.interest": {
+    "de": "Zinsen",
+    "en": "Interest"
+  },
+  "finance.fee": {
+    "de": "Gebühr",
+    "en": "Fee"
+  },
+  "error.insufficientFunds": {
+    "de": "Unzureichende Deckung",
+    "en": "Insufficient funds"
+  },
+  "error.invalidAmount": {
+    "de": "Ungültiger Betrag: {0}",
+    "en": "Invalid amount: {0}"
+  },
+  "error.accountNotFound": {
+    "de": "Konto nicht gefunden: {0}",
+    "en": "Account not found: {0}"
+  },
+  "error.transactionFailed": {
+    "de": "Transaktion fehlgeschlagen: {0}",
+    "en": "Transaction failed: {0}"
+  },
+  "success.transactionCompleted": {
+    "de": "Transaktion erfolgreich abgeschlossen",
+    "en": "Transaction completed successfully"
+  }
+}

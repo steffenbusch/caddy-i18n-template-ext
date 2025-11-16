@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i18n Template Extension - Test/Demo Page</title>
+    <style>
+        body { font-family: monospace; white-space: pre-wrap; padding: 20px; }
+        .section { margin: 20px 0; border: 1px solid #ccc; padding: 10px; }
+        .title { font-weight: bold; font-size: 1.1em; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+{{- $langDE := "de" -}}
+{{- $langEN := "en" -}}
+
+<div class="section">
+    <div class="title">1. Basic Translations (German)</div>
+    Hello: {{ i18nTranslate "hello" $langDE }}
+    Welcome: {{ i18nTranslate "welcome" $langDE }}
+    Goodbye: {{ i18nTranslate "bye" $langDE }}
+</div>
+
+<div class="section">
+    <div class="title">2. Basic Translations (English)</div>
+    Hello: {{ i18nTranslate "hello" $langEN }}
+    Welcome: {{ i18nTranslate "welcome" $langEN }}
+    Goodbye: {{ i18nTranslate "bye" $langEN }}
+</div>
+
+<div class="section">
+    <div class="title">3. Finance Terminology (German)</div>
+    Account: {{ i18nTranslate "finance.account" $langDE }}
+    Balance: {{ i18nTranslate "finance.balance" $langDE }}
+    Transaction: {{ i18nTranslate "finance.transaction" $langDE }}
+    Deposit: {{ i18nTranslate "finance.deposit" $langDE }}
+    Withdrawal: {{ i18nTranslate "finance.withdrawal" $langDE }}
+    Transfer: {{ i18nTranslate "finance.transfer" $langDE }}
+    Invoice: {{ i18nTranslate "finance.invoice" $langDE }}
+    Payment: {{ i18nTranslate "finance.payment" $langDE }}
+    Currency: {{ i18nTranslate "finance.currency" $langDE }}
+    Interest: {{ i18nTranslate "finance.interest" $langDE }}
+    Fee: {{ i18nTranslate "finance.fee" $langDE }}
+</div>
+
+<div class="section">
+    <div class="title">4. Finance Terminology (English)</div>
+    Account: {{ i18nTranslate "finance.account" $langEN }}
+    Balance: {{ i18nTranslate "finance.balance" $langEN }}
+    Transaction: {{ i18nTranslate "finance.transaction" $langEN }}
+    Deposit: {{ i18nTranslate "finance.deposit" $langEN }}
+    Withdrawal: {{ i18nTranslate "finance.withdrawal" $langEN }}
+    Transfer: {{ i18nTranslate "finance.transfer" $langEN }}
+    Invoice: {{ i18nTranslate "finance.invoice" $langEN }}
+    Payment: {{ i18nTranslate "finance.payment" $langEN }}
+    Currency: {{ i18nTranslate "finance.currency" $langEN }}
+    Interest: {{ i18nTranslate "finance.interest" $langEN }}
+    Fee: {{ i18nTranslate "finance.fee" $langEN }}
+</div>
+
+<div class="section">
+    <div class="title">5. Error Messages - Simple (German)</div>
+    Insufficient Funds: {{ i18nTranslate "error.insufficientFunds" $langDE }}
+</div>
+
+<div class="section">
+    <div class="title">6. Error Messages - Simple (English)</div>
+    Insufficient Funds: {{ i18nTranslate "error.insufficientFunds" $langEN }}
+</div>
+
+<div class="section">
+    <div class="title">7. Error Messages - With Literal Arguments (German)</div>
+    Invalid Amount: {{ i18nTranslate "error.invalidAmount" $langDE "500.99" }}
+    Account Not Found: {{ i18nTranslate "error.accountNotFound" $langDE "ACC12345" }}
+    Transaction Failed: {{ i18nTranslate "error.transactionFailed" $langDE "Timeout" }}
+</div>
+
+<div class="section">
+    <div class="title">8. Error Messages - With Literal Arguments (English)</div>
+    Invalid Amount: {{ i18nTranslate "error.invalidAmount" $langEN "500.99" }}
+    Account Not Found: {{ i18nTranslate "error.accountNotFound" $langEN "ACC12345" }}
+    Transaction Failed: {{ i18nTranslate "error.transactionFailed" $langEN "Timeout" }}
+</div>
+
+<div class="section">
+    <div class="title">9. Error Messages - With i18n: Prefix Arguments (German)</div>
+    Invalid Amount: {{ i18nTranslate "error.invalidAmount" $langDE "i18n:finance.account" }}
+    Transaction Failed: {{ i18nTranslate "error.transactionFailed" $langDE "i18n:finance.transfer" }}
+</div>
+
+<div class="section">
+    <div class="title">10. Error Messages - With i18n: Prefix Arguments (English)</div>
+    Invalid Amount: {{ i18nTranslate "error.invalidAmount" $langEN "i18n:finance.account" }}
+    Transaction Failed: {{ i18nTranslate "error.transactionFailed" $langEN "i18n:finance.transfer" }}
+</div>
+
+<div class="section">
+    <div class="title">11. Complex Messages - Nested Translations (German)</div>
+    {{ i18nTranslate "error.internalError" $langDE "i18n:finance.deposit" "i18n:finance.transaction" | html }}
+</div>
+
+<div class="section">
+    <div class="title">12. Complex Messages - Nested Translations (English)</div>
+    {{ i18nTranslate "error.internalError" $langEN "i18n:finance.deposit" "i18n:finance.transaction" | html}}
+</div>
+
+<div class="section">
+    <div class="title">13. Fallback Behavior - Missing Key</div>
+    Missing key returns key itself: {{ i18nTranslate "nonexistent.key" $langDE }}
+</div>
+
+<div class="section">
+    <div class="title">14. Success Message (German)</div>
+    {{ i18nTranslate "success.transactionCompleted" $langDE }}
+</div>
+
+<div class="section">
+    <div class="title">15. Success Message (English)</div>
+    {{ i18nTranslate "success.transactionCompleted" $langEN }}
+</div>
+
+</body>
+</html>
