@@ -308,6 +308,32 @@ func TestI18nInterpolateMultipleArgs(t *testing.T) {
 	}
 }
 
+func TestI18nInterpolateMultipleArgsWithRepeatedPlaceholder(t *testing.T) {
+	i18n := &I18n{
+		translations: map[string]map[string]string{
+			"mixed": {
+				"de": "Wert {0}, danach {1}, und wieder {0}",
+				"en": "Value {0}, then {1}, and again {0}",
+			},
+		},
+	}
+	i18n.mu = new(sync.RWMutex)
+	i18n.logger = zaptest.NewLogger(t)
+
+	funcMap := i18n.CustomTemplateFunctions()
+	translateFunc := funcMap["i18nTranslate"].(func(string, string, ...interface{}) (string, error))
+
+	result, err := translateFunc("mixed", "en", "Alpha", "Beta")
+	if err != nil {
+		t.Errorf("unexpected error: %v", err)
+	}
+
+	expected := "Value Alpha, then Beta, and again Alpha"
+	if result != expected {
+		t.Errorf("expected %q, got %q", result, expected)
+	}
+}
+
 func TestI18nInterpolateNonStringArg(t *testing.T) {
 	i18n := &I18n{
 		translations: map[string]map[string]string{
