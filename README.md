@@ -132,4 +132,8 @@ Each fallback is logged for debugging purposes.
 
 ## License
 
-Licensed under the Apache License 2.0.
+This project is licensed under the Apache License, Version 2.0. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- [Caddy](https://caddyserver.com) for providing a powerful and extensible web server.
